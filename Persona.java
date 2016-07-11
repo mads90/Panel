@@ -16,13 +16,7 @@ public class Persona extends BaseEntity implements Serializable{
 
 	public Persona()
 	{
-		this.cognome="Di Lisa";
-		this.nome="Davide";
-		this.comunenascita="Galatonio";
-		this.datadecesso = new Date();
-		this.datanascita = new Date();
-		this.unid=""+13;
-		this.setNuovo("F");
+		
 	}
 	public void setCognome(String a) {
 		cognome = a;
