@@ -1,4 +1,4 @@
-package componentPanel;
+package panelDDC.domain;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,7 +16,6 @@ public class Persona extends BaseEntity implements Serializable{
 
 	public Persona()
 	{
-		//this.unid="12";
 		this.cognome="Di Lisa";
 		this.nome="Davide";
 		this.comunenascita="Galatonio";
@@ -72,8 +71,18 @@ public class Persona extends BaseEntity implements Serializable{
 	public String getUnid() {
 		return unid;
 	}
-
-
+	
+	public String getShortCombo(){
+		return ""+getUnid()+getNome()+getCognome();
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if( obj instanceof Persona)
+		{
+			return ((Persona)obj).getUnid().equalsIgnoreCase(this.getUnid());
+		}
+		return super.equals(obj);
+	}
 	@Override
 	public String toString() {
 		return "Persona [cognome=" + cognome + ", comunenascita=" + comunenascita + ", datadecesso=" + datadecesso
