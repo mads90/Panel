@@ -1,0 +1,31 @@
+<wicket:panel>
+
+	<form wicket:id="form">
+
+		<table wicket:id="theContainer">
+			<tr>
+				<th>UNID</th>
+				<th>NOME</th>
+				<th>COGNOME</th>
+			</tr>
+			<tr wicket:id="hateList">
+				<td><span wicket:id="unid">UNID</span></td>
+				<td><span wicket:id="nome">NOME</span></td>
+				<td><span wicket:id="cognome">COGNOME</span></td>
+				<td><input type="submit" wicket:id="seleziona" value="seleziona"></td>
+				<!-- <wicket:container wicket:id="radio-admin">
+                <td><input wicket:id="radio-sys-admin" type="radio" /></td>
+                <td><input wicket:id="radio-dept-admin" type="radio" /></td>
+                <td><input wicket:id="radio-no-admin" type="radio" /></td>
+            	</wicket:container>-->
+					
+			</tr>
+		</table>
+		<input type="submit" wicket:id="nuovo" value="nuovo">
+      	<span wicket:id="eta" >ETA</span>
+				
+			
+	
+	</form>
+	
+</wicket:panel>
