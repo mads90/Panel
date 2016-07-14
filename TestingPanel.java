@@ -1,14 +1,4 @@
-package it.cup2000.carceri.testing;
 
-import it.cup2000.carceri.web.common.CarceriPrivilege;
-import it.cup2000.carceri.web.common.ProtectedPanel;
-import it.cup2000.carceri.web.prescrizioni.specialistiche.domain.PrestazioneSearch;
-import it.cup2000.codevalue.domain.CodeValue;
-import it.cup2000.wicket.component.CLabel;
-import it.cup2000.wicket.component.CNumericTextField;
-import it.cup2000.wicket.component.CTextArea;
-import it.cup2000.wicket.component.CodeValueDropDownChoice2;
-import it.cup2000.wicket.component.CDropDownChoice.DropDownChoiceNull;
 
 import java.util.Arrays;
 import java.util.List;
