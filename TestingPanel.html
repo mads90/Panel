@@ -1,0 +1,26 @@
+<wicket:panel>
+
+	<table wicket:id="data">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Desc</th>
+                <th>CodeValue</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr wicket:id="rows">
+                <td wicket:id="name"></td>
+                <td><input type="text" wicket:id="num" ></td>
+                <td><select wicket:id="tipoEsito"></select></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td wicket:id="navigator"></td>
+            </tr>
+        </tfoot>    
+        
+    <textarea rows="5" cols="60" wicket:id="descrizione" />    	
+    </table>
+</wicket:panel>
