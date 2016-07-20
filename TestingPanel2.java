@@ -1,47 +1,27 @@
 package it.cup2000.carceri.testing;
 
-import it.cup2000.carceri.web.CarceriWebConstants;
-import it.cup2000.carceri.web.cartella.domain.OperazioneFoto;
-import it.cup2000.carceri.web.cartella.fase2.domain.AnagSoggetto;
-import it.cup2000.carceri.web.common.CarceriPrivilege;
-import it.cup2000.carceri.web.common.ProtectedPanel;
-import it.cup2000.carceri.web.prescrizioni.specialistiche.domain.PrestazioneSearch;
-import it.cup2000.codevalue.domain.CodeValue;
-import it.cup2000.wicket.component.CCheckBox;
-import it.cup2000.wicket.component.CDatePicker;
-import it.cup2000.wicket.component.CDropDownChoice;
-import it.cup2000.wicket.component.CLabel;
-import it.cup2000.wicket.component.CNumericTextField;
-import it.cup2000.wicket.component.CTextArea;
-import it.cup2000.wicket.component.CTextField;
-import it.cup2000.wicket.component.CodeValueDropDownChoice2;
-import it.cup2000.wicket.component.CodeValueKeyOnlyDropDownChoice;
-import it.cup2000.wicket.component.CDropDownChoice.DropDownChoiceNull;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
-import org.apache.wicket.ajax.markup.html.navigation.paging.AjaxPagingNavigator;
-import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.ChoiceRenderer;
-import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.FormComponent;
-import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+
+import it.cup2000.carceri.web.CarceriWebConstants;
+import it.cup2000.carceri.web.common.CarceriPrivilege;
+import it.cup2000.carceri.web.common.ProtectedPanel;
+import it.cup2000.wicket.component.CCheckBox;
+import it.cup2000.wicket.component.CDropDownChoice;
+import it.cup2000.wicket.component.CDropDownChoice.DropDownChoiceNull;
+import it.cup2000.wicket.component.CTextArea;
+import it.cup2000.wicket.component.CTextField;
 
 public class TestingPanel extends ProtectedPanel {
 
@@ -70,7 +50,7 @@ public class TestingPanel extends ProtectedPanel {
 	private class PersonaForm extends Form<Persona> {
 
 		/**
-		 * 
+		 *
 		 */
 		private static final long serialVersionUID = 5013911894294111805L;
 
@@ -81,33 +61,45 @@ public class TestingPanel extends ProtectedPanel {
 			final CCheckBox cNomeC = new CCheckBox("nomeOk", false);
 			final CTextField<String> cognomeC = new CTextField<String>("cognome", true);
 			final CCheckBox cCognomeC = new CCheckBox("cognomeOk", false);
-			final CDropDownChoice<String> sessoC = new CDropDownChoice<String>("sessoCh", false, DropDownChoiceNull.EMPTY, new PropertyModel<String>(testModel, "sesso"),
-			        uomoDonna);
+			final CDropDownChoice<String> sessoC = new CDropDownChoice<String>("sessoCh", false,
+					DropDownChoiceNull.EMPTY, new PropertyModel<String>(testModel, "sesso"), uomoDonna);
 			final CCheckBox cSessoC = new CCheckBox("sessoOk", false);
 			final CTextArea<String> txAreaC = new CTextArea<String>("txArea", true);
 			txAreaC.setEnabled(false);
-			final CTextArea<String> txSecAreaC = new CTextArea<String>("txSecArea", true);
+
+			final CTextArea<String> txSecAreaC = new CTextArea<String>("txSecArea", true) {
+				/**
+				 *
+				 */
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public boolean isVisible() {
+					return persona.isTxAreaOk();
+				}
+			};
 			txSecAreaC.setVisible(false);
 			final CCheckBox cTxSecAreaC = new CCheckBox("txAreaOk", false);
 			System.out.println(uomoDonna);
-			//nomeC.add(onChangeSubmit());
-			//cognomeC.add(onChangeSubmit());
-			//cNomeC.add( onChangeSubmit());
-			//cCognomeC.add(onChangeSubmit());
+
+			// nomeC.add(onChangeSubmit());
+			// cognomeC.add(onChangeSubmit());
+			// cNomeC.add( onChangeSubmit());
+			// cCognomeC.add(onChangeSubmit());
 			cTxSecAreaC.add(new OnChangeAjaxBehavior() {
 
 				private static final long serialVersionUID = 1L;
 
 				@Override
 				protected void onUpdate(AjaxRequestTarget target) {
-					if (persona.txAreaOk)
-						txSecAreaC.setVisible(false);
-					else
-						txSecAreaC.setVisible(true);
+
+					target.add(txSecAreaC);
 				}
 
 			});
 			final AjaxButton button = new AjaxButton("stampaPersona") {
+
+				private static final long serialVersionUID = 1L;
 
 				@Override
 				public void onSubmit(AjaxRequestTarget target, Form form) {
@@ -139,19 +131,6 @@ public class TestingPanel extends ProtectedPanel {
 		}
 	}
 
-	private AjaxFormComponentUpdatingBehavior onChangeSubmit() {
-		return new OnChangeAjaxBehavior() {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			protected void onUpdate(AjaxRequestTarget target) {
-
-			}
-
-		};
-	}
-
 	public class Persona implements Serializable {
 
 		private static final long serialVersionUID = 1L;
@@ -169,13 +148,14 @@ public class TestingPanel extends ProtectedPanel {
 
 		@Override
 		public String toString() {
-			return "nome = " + getNome() + "\tCognome: " + getCognome() + "\tnomeOK = " + isNomeOk() + "\tcognomeOk = " + isCognomeOk() + "\n";
+			return "nome = " + getNome() + "\tCognome: " + getCognome() + "\tnomeOK = " + isNomeOk() + "\tcognomeOk = "
+					+ isCognomeOk() + "\n";
 		}
 
 		public Persona() {
 			this.setNomeOk(false);
 			this.setCognomeOk(false);
-			this.txAreaOk = false;
+			this.setTxAreaOk(false);
 			this.setNome("");
 			this.setCognome("");
 		}
@@ -264,12 +244,20 @@ public class TestingPanel extends ProtectedPanel {
 			this.txSecArea = txSecArea;
 		}
 
+		public boolean isTxAreaOk() {
+			return txAreaOk;
+		}
+
+		public void setTxAreaOk(boolean txAreaOk) {
+			this.txAreaOk = txAreaOk;
+		}
+
 	}
 
 	public class Test implements Serializable {
 
 		/**
-		 * 
+		 *
 		 */
 		private static final long serialVersionUID = -8721534434765106356L;
 		int N = 10;
