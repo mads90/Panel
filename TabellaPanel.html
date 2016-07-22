@@ -1,0 +1,18 @@
+<wicket:panel>
+
+	<div class="tab-box persona">
+		<form wicket:id="form">
+			<ul>
+				<li><input type="text" maxlength="100" size="40" wicket:id="nome"></li>
+				<li><input type="text" maxlength="100" size="40" wicket:id="cognome"></li>
+				<li><select wicket:id="sessoCh"></select></li>
+				<li><textarea wicket:id="txArea" rows="5" maxlength="2900" /><input type="checkbox"
+					wicket:id="txAreaOk" /></li>
+					<li><button wicket:id="button">Inserisci</button></li>
+			</ul>
+
+			<div wicket:id="personeTable">
+			</div>
+		</form>
+	</div>
+</wicket:panel>
